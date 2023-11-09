@@ -1,4 +1,4 @@
-# Hack'n'Lead * Women++ challenge * Team 6
+# Hack'n'Lead * women++ challenge * Team 6
 
 ## Context:
 
