@@ -49,7 +49,7 @@ const GenderChart = () => {
 
   return (
     <Grid container flexDirection="column" pt={5} px={1} alignItems="center">
-      <Typography variant="h6">Gender Distribution Chart</Typography>
+      <Typography variant="h5">Gender Distribution Chart</Typography>
       <Select
         value={selectedYear}
         onChange={handleYearChange}
