@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import Plotly from "plotly.js-dist";
 import createPlotlyComponent from "react-plotly.js/factory";
-import {
-  Select,
-  MenuItem,
-  Typography,
-  Container,
-  Paper,
-  ThemeProvider,
-  createTheme,
-  Grid,
-} from "@mui/material";
+import { Select, MenuItem, Typography, createTheme, Grid } from "@mui/material";
 
 const Plot = createPlotlyComponent(Plotly);
 
@@ -46,7 +37,6 @@ const ParticipantsChart = () => {
       marker: {
         colors: customColors,
       },
-      title: `Year ${selectedYear} - Participating vs Non-Participating`,
       textinfo: "label",
       hole: 0.4,
       hoverinfo: "label+percent",
@@ -71,7 +61,7 @@ const ParticipantsChart = () => {
       <Select
         value={selectedYear}
         onChange={handleYearChange}
-        sx={{ padding: 0, marginY: 1.1, width: "30%" }}
+        sx={{ padding: 0, marginTop: 1.1, width: "30%", height: "32px" }}
       >
         {data.Year.map((year) => (
           <MenuItem key={year} value={year}>
@@ -79,8 +69,7 @@ const ParticipantsChart = () => {
           </MenuItem>
         ))}
       </Select>
-      <Typography variant="h6">{`Year ${selectedYear} - Participants Distribution`}</Typography>
-      <Plot data={plotData} layout={{ height: 500, width: 480 }} />
+      <Plot data={plotData} layout={{ height: 400, width: 400 }} />
     </Grid>
   );
 };

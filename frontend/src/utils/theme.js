@@ -39,7 +39,11 @@ theme = createTheme(theme, {
     },
     h6: {
       fontSize: "1rem",
-    },
+    },subtitle: {
+      fontSize: "0.8rem",
+
+    }
+
   },
   components: {
     MuiCssBaseline: {

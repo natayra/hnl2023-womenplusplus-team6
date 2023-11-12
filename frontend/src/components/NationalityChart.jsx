@@ -5,10 +5,6 @@ import {
   Select,
   MenuItem,
   Typography,
-  Container,
-  Paper,
-  ThemeProvider,
-  createTheme,
   Grid,
 } from "@mui/material";
 
@@ -49,7 +45,6 @@ const NationalityChart = () => {
       marker: {
         colors: customColors,
       },
-      title: `Donut Chart of Nationalities for Year ${selectedYear}`,
       hole: 0.4,
       textinfo: "label",
       hoverinfo: "label+percent",
@@ -62,7 +57,7 @@ const NationalityChart = () => {
       <Select
         value={selectedYear}
         onChange={handleYearChange}
-        sx={{ padding: 0, marginY: 1.1, width: "30%" }}
+        sx={{ padding: 0, marginTop: 1.1, width: "30%", height: "32px" }}
       >
         {data.Year.map((year) => (
           <MenuItem key={year} value={year}>
@@ -70,8 +65,7 @@ const NationalityChart = () => {
           </MenuItem>
         ))}
       </Select>
-      <Typography variant="h6">{`Year ${selectedYear} - Nationality Distribution`}</Typography>
-      <Plot data={plotData} layout={{ height: 500, width: 480 }} />
+      <Plot data={plotData} layout={{ height: 400, width: 400 }} />
     </Grid>
   );
 };

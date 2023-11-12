@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import GenderChart from "./GenderChart";
 import NationalityChart from "./NationalityChart";
 import ParticipantsChart from "./ParticipantsChart";
+import OverviewChart from "./OverviewChart";
 
 const Widgets = ({ eventSelected }) => {
   const ev =
@@ -121,22 +122,84 @@ const Widgets = ({ eventSelected }) => {
       title: "Applicants",
       number: applicants,
       image: <FeedIcon fontSize="large" />,
+      chart: <OverviewChart />,
+    },
+  ];
+  const widgetContent2 = [
+    {
+      title: "Gender",
+      number: (
+        <Stack>
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 600,
+            }}
+          >
+            {`${Math.floor((women * 100) / applicants)}% Women`}
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 600,
+            }}
+          >
+            {`${Math.floor((men * 100) / applicants)}% Men`}
+          </Typography>
+        </Stack>
+      ),
+      image: <WcIcon fontSize="large" />,
+      chart: <GenderChart />,
+    },
+    {
+      title: "Nacionality",
+      number: nationalitiesUnique.map((item) => (
+        <Chip
+          key={item}
+          label={item}
+          variant="outlined"
+          sx={{ marginX: 0.5, fontSize: "0.8rem", padding: 1 }}
+        />
+      )),
+      image: <FlagIcon fontSize="large" />,
+      chart: <NationalityChart />,
+    },
+    {
+      title: "Participants",
+      number: participants,
+      image: <Diversity1Icon fontSize="large" />,
+      chart: <ParticipantsChart />,
+    },
+    {
+      title: "Applicants",
+      number: applicants,
+      image: <FeedIcon fontSize="large" />,
+      chart: <OverviewChart />,
+    },
+    {
+      title: "Applicants",
+      number: applicants,
+      image: <FeedIcon fontSize="large" />,
+      chart: <></>,
     },
 
     {
       title: "First Experience in Tech",
       number: firstTime,
       image: <Filter1Icon fontSize="large" />,
+      chart: <></>,
     },
     {
       title: "Hours of Volunteering",
       number: totalHours,
       image: <WatchLaterIcon fontSize="large" />,
+      chart: <></>,
     },
     {
       title: "Projects",
       number: projectsUnique.length - 1,
       image: <AccountTreeIcon fontSize="large" />,
+      chart: <></>,
     },
   ];
 
@@ -150,32 +213,50 @@ const Widgets = ({ eventSelected }) => {
               padding: content.chart ? 0 : 3,
             }}
           >
-            {!content.chart && (
-              <>
-                <Box>{content.image}</Box>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    fontWeight: 600,
-                  }}
-                >
-                  {content.number}
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="tertiary.main"
-                  sx={{
-                    fontWeight: 800,
-                  }}
-                >
-                  {content.title}
-                </Typography>
-              </>
-            )}
             {content.chart}
           </Button>
         </Grid>
       ))}
+      <Grid item xs={12} mt={10} mb={2}>
+        <Typography variant="h3" textAlign="center">
+          Overview
+        </Typography>
+      </Grid>
+      <Grid container item spacing={4} justifyContent="center">
+        {widgetContent2.map((content) => (
+          <Grid item key={content.title}>
+            <Button
+              variant="card"
+              sx={{
+                padding: content.chart ? 0 : 3,
+                width: "50px",
+                height: "50px",
+              }}
+            >
+              <Box>{content.image}</Box>
+              <Typography
+                variant="subtitle"
+                color="tertiary.main"
+                sx={{
+                  fontWeight: 800,
+                  marginBottom: 1.5,
+                  marginTop: -0.5,
+                }}
+              >
+                {content.title}
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 600,
+                }}
+              >
+                {content.number}
+              </Typography>
+            </Button>
+          </Grid>
+        ))}
+      </Grid>
     </Grid>
   );
 };

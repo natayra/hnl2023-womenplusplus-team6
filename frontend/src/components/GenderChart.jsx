@@ -41,7 +41,6 @@ const GenderChart = () => {
       marker: {
         colors: customColors,
       },
-      title: `Gender Distribution for Year ${selectedYear}`,
       textinfo: "label",
       pull: [0, 0.1, 0],
       hoverinfo: "label",
@@ -50,11 +49,11 @@ const GenderChart = () => {
 
   return (
     <Grid container flexDirection="column" pt={5} px={1} alignItems="center">
-      <Typography variant="h5">Gender Distribution Chart</Typography>
+      <Typography variant="h6">Gender Distribution Chart</Typography>
       <Select
         value={selectedYear}
         onChange={handleYearChange}
-        sx={{ padding: 0, marginY: 1.1, width: "30%" }}
+        sx={{ padding: 0, marginTop: 1.1, width: "30%", height: "32px" }}
       >
         {data.Year.map((year) => (
           <MenuItem key={year} value={year}>
@@ -62,8 +61,7 @@ const GenderChart = () => {
           </MenuItem>
         ))}
       </Select>
-      <Typography variant="h6">{`Year ${selectedYear} - Gender Distribution`}</Typography>
-      <Plot data={plotData} layout={{ height: 500, width: 480 }} />
+      <Plot data={plotData} layout={{ height: 400, width: 400 }} />
 
 
 
