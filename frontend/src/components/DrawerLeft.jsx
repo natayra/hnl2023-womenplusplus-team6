@@ -1,11 +1,8 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
+import { Box, Grid, Drawer, List, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,7 +12,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Widgets from "./Widgets";
-
+import Logo from "../assets/logo.png";
+import { useState } from "react";
+import Footer from "./Footer";
+import OverviewChart from "./GenderChart";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -63,10 +63,17 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+const events = [
+  "All",
+  "Hack'n'Lead",
+  "Scholarships",
+  "Deploy(impact)",
+  "Mental Health Webnars",
+];
 export default function DrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const [eventSelected, setEventSelected] = useState("All");
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -75,8 +82,12 @@ export default function DrawerLeft() {
     setOpen(false);
   };
 
+  const handleClickEvent = (text) => {
+    setEventSelected(text);
+  };
+
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", minHeight: "100vh", paddingBottom: "20vh" }}>
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -88,8 +99,9 @@ export default function DrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h4" textAlign="center">
-            Dashboard
+          <img src={Logo} width="auto" height="40px" alt="logo" />
+          <Typography variant="h4" textAlign="center" ml={2}>
+            ImpactLens Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -106,8 +118,18 @@ export default function DrawerLeft() {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader
+          sx={{
+            backgroundColor: "primary.main",
+            color: "common.white",
+          }}
+        >
+          <IconButton
+            onClick={handleDrawerClose}
+            sx={{
+              color: "common.white",
+            }}
+          >
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
@@ -117,15 +139,24 @@ export default function DrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {[
-            "All",
-            "Hack'n'Lead",
-            "Send Scholarships",
-            "Deploy(impact)",
-            "Mental Health Webnars",
-          ].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
+          {events.map((text) => (
+            <ListItem
+              className="border"
+              key={text}
+              disablePadding
+              onClick={() => handleClickEvent(text)}
+              sx={{
+                borderBottom: `1px solid ${theme.palette.secondary.main}`,
+                borderLeft:
+                  eventSelected === text
+                    ? `0.5rem solid ${theme.palette.tertiary.main}`
+                    : "none",
+                "&:hover": {
+                  borderLeft: `0.5rem solid ${theme.palette.tertiary.main}`,
+                },
+              }}
+            >
+              <ListItemButton sx={{ paddingY: 2 }}>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
@@ -134,7 +165,8 @@ export default function DrawerLeft() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Widgets />
+        <Widgets eventSelected={eventSelected} />
+        <Footer />
       </Main>
     </Box>
   );

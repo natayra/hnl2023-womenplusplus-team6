@@ -44,7 +44,7 @@ theme = createTheme(theme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        body: {},
+        body: { backgroundColor: "#f9f9f9" },
       },
     },
     MuiButton: {
@@ -80,13 +80,17 @@ theme = createTheme(theme, {
         },
         card: {
           textTransform: "none",
-          border: "1px solid black",
-          padding: 30,
-          borderRadius: 10,
+          textAlign: "center",
+          borderRadius: 5,
           display: "flex",
           flexDirection: "column",
+          border: "none",
+          backgroundColor: theme.palette.common.white,
+          minHeight: "200px",
+          minWidth: "400px",
+          boxShadow: "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
           "&:hover": {
-            backgroundColor: theme.palette.grey[300],
+            backgroundColor: "white"
           },
         },
       },
@@ -120,11 +124,18 @@ theme = createTheme(theme, {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: theme.palette.common.white,
-          color: theme.palette.common.black,
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.common.white,
           boxShadow: "none",
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0
+        },
+      },
+    }
   },
 });
